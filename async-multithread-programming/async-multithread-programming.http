@@ -1,0 +1,6 @@
+@async_multithread_programming_HostAddress = http://localhost:5090
+
+GET {{async_multithread_programming_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

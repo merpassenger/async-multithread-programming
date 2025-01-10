@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "async-multithread-programming", "async-multithread-programming\async-multithread-programming.csproj", "{CA7AAA46-D934-492F-83C1-6F1DC33A4645}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA7AAA46-D934-492F-83C1-6F1DC33A4645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7AAA46-D934-492F-83C1-6F1DC33A4645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7AAA46-D934-492F-83C1-6F1DC33A4645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7AAA46-D934-492F-83C1-6F1DC33A4645}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
