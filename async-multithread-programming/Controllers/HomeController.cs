@@ -1,4 +1,5 @@
 using System.Net;
+using async_multithread_programming.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace async_multithread_programming.Controllers;
@@ -67,4 +68,80 @@ public class HomeController : ControllerBase
          * task data 
          */
     }
+
+    [HttpGet("GetDataTaskWhenAll")]
+    public async Task<IActionResult> GetDataTaskWhenAllAsync()
+    {
+        Console.WriteLine("Main thread:" + Thread.CurrentThread.ManagedThreadId);
+        List<string> urlList = new List<string>()
+        {
+            "https://www.google.com",
+            "https://www.microsoft.com",
+            "https://www.amazon.com",
+        };
+
+        List<Task<Content>> tasksList = new List<Task<Content>>();
+
+        ContentMethod contentMethod = new ContentMethod();
+        
+        urlList.ToList().ForEach(x =>
+        {
+            tasksList.Add(contentMethod.GetContentAsync(x));
+        });
+
+        var contents = await Task.WhenAll(tasksList.ToArray());
+
+        contents.ToList().ForEach(x =>
+        {
+            Console.WriteLine(x);
+        });
+
+        return Ok(contents);
+
+    }
+    
+    [HttpGet("GetDataTaskWaitAll")]
+    public async Task<IActionResult> GetDataTaskWaitAllAsync()
+    {
+        Console.WriteLine("Main thread:" + Thread.CurrentThread.ManagedThreadId);
+        List<string> urlList = new List<string>()
+        {
+            "https://www.google.com",
+            "https://www.microsoft.com",
+            "https://www.amazon.com",
+        };
+
+        List<Task<Content>> tasksList = new List<Task<Content>>();
+
+        ContentMethod contentMethod = new ContentMethod();
+        
+        urlList.ToList().ForEach(x =>
+        {
+            tasksList.Add(contentMethod.GetContentAsync(x));
+        });
+
+        Console.WriteLine("Before WaitAll Method:" + Thread.CurrentThread.ManagedThreadId);
+        
+        Task.WaitAll(tasksList.ToArray());
+
+        Console.WriteLine("After WaitAll Method:" + Thread.CurrentThread.ManagedThreadId);
+        
+        /*
+           Main thread:4
+           Before WaitAll Method:4
+           After WaitAll Method:4
+           Main thread:25
+           Before WaitAll Method:25
+           Content thread:26
+           Content thread:4
+           Content thread:26
+           After WaitAll Method:25
+           
+         */
+        
+        return Ok();
+
+    }
+    
+   
 }
